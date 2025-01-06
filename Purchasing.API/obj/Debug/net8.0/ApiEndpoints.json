@@ -1,0 +1,229 @@
+[
+  {
+    "ContainingType": "Purchasing.API.Controllers.ItemsController",
+    "Method": "Create",
+    "RelativePath": "api/Items",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemDto",
+        "Type": "Purchasing.Application.DTOs.PurchaseOrderItemDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.ItemsController",
+    "Method": "GetAll",
+    "RelativePath": "api/Items",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.ItemsController",
+    "Method": "GetById",
+    "RelativePath": "api/Items/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.ItemsController",
+    "Method": "Update",
+    "RelativePath": "api/Items/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemDto",
+        "Type": "Purchasing.Application.DTOs.PurchaseOrderItemUpdateDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.ItemsController",
+    "Method": "Delete",
+    "RelativePath": "api/Items/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.ItemsController",
+    "Method": "GetPagedItems",
+    "RelativePath": "api/Items/paged",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Paging",
+        "Type": "Purchasing.Application.DTOs.PurchaseOrderItemPagination",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "CreatePurchaseOrder",
+    "RelativePath": "api/PurchaseOrder",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "purchaseOrderDto",
+        "Type": "Purchasing.Application.DTOs.PurchaseOrderDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "GetAllPurchaseOrders",
+    "RelativePath": "api/PurchaseOrder",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "GetPurchaseOrderById",
+    "RelativePath": "api/PurchaseOrder/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "UpdatePurchaseOrder",
+    "RelativePath": "api/PurchaseOrder/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "purchaseOrderDto",
+        "Type": "Purchasing.Application.DTOs.PurchaseOrderDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "DeletePurchaseOrder",
+    "RelativePath": "api/PurchaseOrder/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "ApprovePurchaseOrder",
+    "RelativePath": "api/PurchaseOrder/{id}/approve",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "ClosePurchaseOrder",
+    "RelativePath": "api/PurchaseOrder/{id}/close",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Purchasing.API.Controllers.Purchasing.API.Controllers.PurchaseOrderController",
+    "Method": "ShipPurchaseOrder",
+    "RelativePath": "api/PurchaseOrder/{id}/ship",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

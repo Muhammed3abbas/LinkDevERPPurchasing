@@ -1,0 +1,30 @@
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\bin\Debug\net8.0\Purchasing.Application.deps.json
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\bin\Debug\net8.0\Purchasing.Application.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\bin\Debug\net8.0\Purchasing.Application.pdb
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\bin\Debug\net8.0\Purchasing.Domain.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\bin\Debug\net8.0\Purchasing.Domain.pdb
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.csproj.AssemblyReference.cache
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.AssemblyInfoInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.AssemblyInfo.cs
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.csproj.CoreCompileInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasi.5134E84D.Up2Date
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\refint\Purchasing.Application.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.pdb
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Application\obj\Debug\net8.0\ref\Purchasing.Application.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\bin\Debug\net8.0\Purchasing.Application.deps.json
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\bin\Debug\net8.0\Purchasing.Application.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\bin\Debug\net8.0\Purchasing.Application.pdb
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\bin\Debug\net8.0\Purchasing.Domain.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\bin\Debug\net8.0\Purchasing.Domain.pdb
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.csproj.AssemblyReference.cache
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.AssemblyInfoInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.AssemblyInfo.cs
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.csproj.CoreCompileInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasi.5134E84D.Up2Date
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\refint\Purchasing.Application.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\Purchasing.Application.pdb
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Application\obj\Debug\net8.0\ref\Purchasing.Application.dll

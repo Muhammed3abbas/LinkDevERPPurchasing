@@ -1,0 +1,34 @@
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.deps.json
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.runtimeconfig.json
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.pdb
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Domain.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Domain.pdb
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.csproj.AssemblyReference.cache
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.AssemblyInfoInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.AssemblyInfo.cs
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.csproj.CoreCompileInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasi.E62558B0.Up2Date
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\refint\Purchasing.Infrastructure.dll
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.pdb
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.genruntimeconfig.cache
+D:\LinkDev\Assessment Task\ERPSystem\Purchasing.Infrastructure\obj\Debug\net8.0\ref\Purchasing.Infrastructure.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.deps.json
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.runtimeconfig.json
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Infrastructure.pdb
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Domain.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\bin\Debug\net8.0\Purchasing.Domain.pdb
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.csproj.AssemblyReference.cache
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.AssemblyInfoInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.AssemblyInfo.cs
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.csproj.CoreCompileInputs.cache
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasi.E62558B0.Up2Date
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\refint\Purchasing.Infrastructure.dll
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.pdb
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\Purchasing.Infrastructure.genruntimeconfig.cache
+D:\LinkDev\Assessment Task\ERPSystem - Copy\PurchasingProject\Purchasing.Infrastructure\obj\Debug\net8.0\ref\Purchasing.Infrastructure.dll
