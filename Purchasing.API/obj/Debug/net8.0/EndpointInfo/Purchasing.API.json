@@ -14,17 +14,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderItemDTO"
+                "$ref": "#/components/schemas/PurchaseOrderItemCreateDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderItemDTO"
+                "$ref": "#/components/schemas/PurchaseOrderItemCreateDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderItemDTO"
+                "$ref": "#/components/schemas/PurchaseOrderItemCreateDTO"
               }
             }
           }
@@ -39,6 +39,35 @@
         "tags": [
           "Items"
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseOrderItemUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseOrderItemUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseOrderItemUpdateDTO"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -67,52 +96,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "Items"
-        ],
-        "parameters": [
-          {
-            "name": "Code",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderItemUpdateDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderItemUpdateDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderItemUpdateDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Items"
@@ -135,7 +118,7 @@
       }
     },
     "/api/Items/paged": {
-      "get": {
+      "post": {
         "tags": [
           "Items"
         ],
@@ -174,17 +157,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderDTO"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PurchaseOrderItemBuyDTO"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderDTO"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PurchaseOrderItemBuyDTO"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseOrderDTO"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PurchaseOrderItemBuyDTO"
+                }
               }
             }
           }
@@ -352,6 +344,28 @@
           }
         }
       }
+    },
+    "/api/PurchaseOrder/{id}/Deactivate": {
+      "put": {
+        "tags": [
+          "PurchaseOrder"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -374,20 +388,30 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PurchaseOrderItemDTO"
+              "$ref": "#/components/schemas/PurchaseOrderItemBuyDTO"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "PurchaseOrderItemDTO": {
+      "PurchaseOrderItemBuyDTO": {
         "type": "object",
         "properties": {
           "code": {
             "type": "string",
             "nullable": true
           },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PurchaseOrderItemCreateDTO": {
+        "type": "object",
+        "properties": {
           "name": {
             "type": "string",
             "nullable": true
@@ -424,6 +448,10 @@
       "PurchaseOrderItemUpdateDTO": {
         "type": "object",
         "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
           "name": {
             "type": "string",
             "nullable": true

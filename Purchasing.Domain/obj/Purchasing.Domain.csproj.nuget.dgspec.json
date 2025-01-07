@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj": {}
+    "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj": {}
   },
   "projects": {
-    "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj": {
+    "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj",
+        "projectUniqueName": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj",
         "projectName": "Purchasing.Domain",
-        "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj",
+        "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Domain\\obj\\",
+        "outputPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

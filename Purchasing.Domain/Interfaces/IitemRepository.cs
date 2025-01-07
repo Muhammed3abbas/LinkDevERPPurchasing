@@ -16,6 +16,8 @@ namespace Purchasing.Domain.Interfaces
         Task UpdateAsync(PurchaseOrderItem item);
         Task SoftDeleteAsync(PurchaseOrderItem item);
         Task SaveChangesAsync();
+        void Detach(PurchaseOrderItem entity);
+
 
 
 

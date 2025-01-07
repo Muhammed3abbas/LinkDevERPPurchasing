@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Purchasing.Application.DTOs;
 using Purchasing.Application.Services;
+using Purchasing.Domain.DTOs;
 using Purchasing.Domain.Models;
 
 namespace Purchasing.API.Controllers
@@ -19,7 +19,7 @@ namespace Purchasing.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PurchaseOrderItemDTO itemDto)
+        public async Task<IActionResult> Create([FromBody] PurchaseOrderItemCreateDTO itemDto)
         {
             var item = await _itemService.CreateItemAsync(itemDto.Name, itemDto.Price,itemDto.Quantity);
             return Ok(item);
@@ -40,18 +40,18 @@ namespace Purchasing.API.Controllers
             return Ok(items);
         }
 
-        [HttpGet("paged")]
+        [HttpPost("paged")]
         public async Task<IActionResult> GetPagedItems([FromBody] PurchaseOrderItemPagination Paging)
         {
             var items = await _itemService.GetPagedItemsAsync(Paging.pageNumber, Paging.pageSize, Paging.nameFilter);
             return Ok(items);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string Code, [FromBody] PurchaseOrderItemUpdateDTO itemDto)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] PurchaseOrderItemUpdateDTO itemDto)
         {
-            await _itemService.UpdateItemAsync(Code, itemDto.Name,itemDto.Price ,itemDto.Quantity);
-            return NoContent();
+            var itemUpdated = await _itemService.UpdateItemAsync(itemDto);
+            return Ok(itemUpdated);
         }
 
 
@@ -59,7 +59,7 @@ namespace Purchasing.API.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             await _itemService.DeleteItemAsync(id);
-            return NoContent();
+            return Ok();
         }
 
 

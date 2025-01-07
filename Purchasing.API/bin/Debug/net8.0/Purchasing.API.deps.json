@@ -1220,6 +1220,7 @@
       },
       "Purchasing.Application/1.0.0": {
         "dependencies": {
+          "AutoMapper": "13.0.1",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
           "Purchasing.Domain": "1.0.0"
         },

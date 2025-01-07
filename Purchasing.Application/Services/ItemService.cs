@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Purchasing.Application.DTOs;
+using Purchasing.Domain.DTOs;
 using Purchasing.Domain.Interfaces;
 using Purchasing.Domain.Models;
 using System;
@@ -15,19 +17,22 @@ namespace Purchasing.Application.Services
     {
         private readonly IItemRepository _itemRepository;
         private readonly ILogger<ItemService> _logger;
+        private readonly IMapper _mapper;
 
-        public ItemService(IItemRepository itemRepository, ILogger<ItemService> logger = null)
+        public ItemService(IItemRepository itemRepository, ILogger<ItemService> logger = null, IMapper mapper = null)
         {
             _itemRepository = itemRepository;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        public async Task<PurchaseOrderItem> CreateItemAsync(string name, decimal price,int quantity)
+        public async Task<PurchaseOrderItemDTO> CreateItemAsync(string name, decimal price,int quantity)
         {
             var item = new PurchaseOrderItem(name, price,quantity);
             await _itemRepository.AddAsync(item);
-            return item;
+            return _mapper.Map<PurchaseOrderItemDTO>(item);
         }
+
 
         public async Task<PurchaseOrderItem> GetItemByIdAsync(string id)
         {
@@ -62,17 +67,20 @@ namespace Purchasing.Application.Services
         }
 
 
-        public async Task UpdateItemAsync(string code, string? name, decimal? price , int? quantity)
+        public async Task<PurchaseOrderItem> UpdateItemAsync(PurchaseOrderItemUpdateDTO itemUpdateDTO)
         {
-            var item = await _itemRepository.GetByIdAsync(code);
+            var item = await _itemRepository.GetByIdAsync(itemUpdateDTO.Code);
             if (item != null)
             {
-                item.Update(name, price,quantity);
+                item.Update(itemUpdateDTO.Name, itemUpdateDTO.Price, itemUpdateDTO.Quantity);
                 await _itemRepository.UpdateAsync(item);
+                return item;
+
             }
             else
             {
-                _logger.LogError($"Item with id {code} not found");
+                _logger.LogError($"Item with Code {itemUpdateDTO.Code} not found");
+                return null;
             }
         }
 

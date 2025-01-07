@@ -66,5 +66,15 @@ namespace Purchasing.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+
+        //public void Detach<T>(T entity) where T : class
+        //{
+        //    _context.Entry(entity).State = EntityState.Detached;
+        //}
+
+        public void Detach(PurchaseOrderItem entity)
+        {
+            _context.Entry(entity).State = EntityState.Detached;
+        }
     }
 }

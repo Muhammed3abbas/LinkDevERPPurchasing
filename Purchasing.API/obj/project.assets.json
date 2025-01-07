@@ -1924,6 +1924,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "AutoMapper": "13.0.1",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
           "Purchasing.Domain": "1.0.0"
         },
@@ -5320,11 +5321,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.API\\Purchasing.API.csproj",
+      "projectUniqueName": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.API\\Purchasing.API.csproj",
       "projectName": "Purchasing.API",
-      "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.API\\Purchasing.API.csproj",
+      "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.API\\Purchasing.API.csproj",
       "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-      "outputPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.API\\obj\\",
+      "outputPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5345,11 +5346,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Application\\Purchasing.Application.csproj": {
-              "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Application\\Purchasing.Application.csproj"
+            "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Application\\Purchasing.Application.csproj": {
+              "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Application\\Purchasing.Application.csproj"
             },
-            "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Infrastructure\\Purchasing.Infrastructure.csproj": {
-              "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Infrastructure\\Purchasing.Infrastructure.csproj"
+            "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Infrastructure\\Purchasing.Infrastructure.csproj": {
+              "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Infrastructure\\Purchasing.Infrastructure.csproj"
             }
           }
         }

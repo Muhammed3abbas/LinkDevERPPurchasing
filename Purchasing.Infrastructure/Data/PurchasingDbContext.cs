@@ -19,9 +19,26 @@ namespace Purchasing.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure PurchaseOrder
             modelBuilder.Entity<PurchaseOrder>().HasKey(po => po.POnumber);
+
+            // Configure PurchaseOrderItem
             modelBuilder.Entity<PurchaseOrderItem>().HasKey(poi => poi.Code);
-            // Additional configurations
+
+            // Configure the junction table
+            modelBuilder.Entity<PurchaseOrderItemMapping>()
+                .HasKey(mapping => mapping.SerialNumber);
+
+            modelBuilder.Entity<PurchaseOrderItemMapping>()
+                .HasOne(mapping => mapping.PurchaseOrder)
+                .WithMany(po => po.PurchaseOrderItemMappings)
+                .HasForeignKey(mapping => mapping.PurchaseOrderPOnumber);
+
+            modelBuilder.Entity<PurchaseOrderItemMapping>()
+                .HasOne(mapping => mapping.PurchaseOrderItem)
+                .WithMany(poi => poi.PurchaseOrderItemMappings)
+                .HasForeignKey(mapping => mapping.PurchaseOrderItemCode);
+
         }
     }
 }

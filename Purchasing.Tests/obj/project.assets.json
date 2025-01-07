@@ -972,11 +972,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Tests\\Purchasing.Tests.csproj",
+      "projectUniqueName": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Tests\\Purchasing.Tests.csproj",
       "projectName": "Purchasing.Tests",
-      "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Tests\\Purchasing.Tests.csproj",
+      "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Tests\\Purchasing.Tests.csproj",
       "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-      "outputPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Tests\\obj\\",
+      "outputPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -997,8 +997,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj": {
-              "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystem - Copy\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj"
+            "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj": {
+              "projectPath": "D:\\LinkDev\\Assessment Task\\ERPSystemAssessmment\\PurchasingProject\\Purchasing.Domain\\Purchasing.Domain.csproj"
             }
           }
         }

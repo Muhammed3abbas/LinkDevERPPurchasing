@@ -21,12 +21,19 @@ namespace Purchasing.Infrastructure.Repositories
 
         public async Task<IEnumerable<PurchaseOrder>> GetAllAsync()
         {
-            return await _context.PurchaseOrders.ToListAsync();
+            return await _context.PurchaseOrders
+                .Include(po => po.Items)
+                .Where(po => !po.IsDeleted)
+                .AsNoTracking()
+                .ToListAsync();
         }
+
 
         public async Task<PurchaseOrder> GetByIdAsync(string PONumber)
         {
-            return await _context.PurchaseOrders.Include(po => po.Items).FirstOrDefaultAsync(po => po.POnumber == PONumber);
+            return await _context.PurchaseOrders
+                .Include(po => po.Items)
+                .FirstOrDefaultAsync(po => po.POnumber == PONumber && !po.IsDeleted);
         }
 
         public async Task AddAsync(PurchaseOrder purchaseOrder)
@@ -41,14 +48,14 @@ namespace Purchasing.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(string PONumber)
+        public async Task<bool> DeleteAsync(string PONumber)
         {
             var purchaseOrder = await GetByIdAsync(PONumber);
-            if (purchaseOrder != null)
-            {
-                _context.PurchaseOrders.Remove(purchaseOrder);
-                await _context.SaveChangesAsync();
-            }
+            if (purchaseOrder == null) return false;
+
+            purchaseOrder.MarkAsDeleted();
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

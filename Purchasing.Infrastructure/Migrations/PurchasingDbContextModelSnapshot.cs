@@ -30,6 +30,9 @@ namespace Purchasing.Infrastructure.Migrations
                     b.Property<int>("ActivationState")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("IssuedDate")
                         .HasColumnType("datetime2");
 
@@ -72,6 +75,34 @@ namespace Purchasing.Infrastructure.Migrations
                     b.ToTable("PurchaseOrderItems");
                 });
 
+            modelBuilder.Entity("Purchasing.Domain.Models.PurchaseOrderItemMapping", b =>
+                {
+                    b.Property<int>("SerialNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SerialNumber"));
+
+                    b.Property<string>("PurchaseOrderItemCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PurchaseOrderPOnumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("SerialNumber");
+
+                    b.HasIndex("PurchaseOrderItemCode");
+
+                    b.HasIndex("PurchaseOrderPOnumber");
+
+                    b.ToTable("PurchaseOrderItemMapping");
+                });
+
             modelBuilder.Entity("Purchasing.Domain.Models.PurchaseOrderItem", b =>
                 {
                     b.HasOne("Purchasing.Domain.Models.PurchaseOrder", null)
@@ -79,9 +110,35 @@ namespace Purchasing.Infrastructure.Migrations
                         .HasForeignKey("PurchaseOrderPOnumber");
                 });
 
+            modelBuilder.Entity("Purchasing.Domain.Models.PurchaseOrderItemMapping", b =>
+                {
+                    b.HasOne("Purchasing.Domain.Models.PurchaseOrderItem", "PurchaseOrderItem")
+                        .WithMany("PurchaseOrderItemMappings")
+                        .HasForeignKey("PurchaseOrderItemCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Purchasing.Domain.Models.PurchaseOrder", "PurchaseOrder")
+                        .WithMany("PurchaseOrderItemMappings")
+                        .HasForeignKey("PurchaseOrderPOnumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PurchaseOrder");
+
+                    b.Navigation("PurchaseOrderItem");
+                });
+
             modelBuilder.Entity("Purchasing.Domain.Models.PurchaseOrder", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("PurchaseOrderItemMappings");
+                });
+
+            modelBuilder.Entity("Purchasing.Domain.Models.PurchaseOrderItem", b =>
+                {
+                    b.Navigation("PurchaseOrderItemMappings");
                 });
 #pragma warning restore 612, 618
         }

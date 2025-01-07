@@ -7,15 +7,21 @@ using System.Xml.Linq;
 
 namespace Purchasing.Domain.Models
 {
-    public class PurchaseOrderItem
+    public class PurchaseOrderItem : BaseEntity
     {
         private static readonly Random _random = new Random();
 
-        public string Code { get; private set; } 
-        public string Name { get; private set; }
-        public decimal Price { get; private set; }
-        public int Quantity { get; private set; }
-        public bool IsDeleted { get; private set; }
+        public string Code { get;  set; } 
+        public string Name { get;  set; }
+        public decimal Price { get;  set; }
+        public int Quantity { get;  set; }
+
+        // Navigation property for the junction table
+        public List<PurchaseOrderItemMapping> PurchaseOrderItemMappings { get; private set; } = new List<PurchaseOrderItemMapping>();
+        public PurchaseOrderItem()
+        {
+                
+        }
 
 
         public PurchaseOrderItem(string name, decimal price, int quantity)
@@ -28,6 +34,20 @@ namespace Purchasing.Domain.Models
 
         }
 
+        public PurchaseOrderItem(string name, decimal price, int quantity,string code)
+        {
+            Name = name;
+            Price = price;
+            IsDeleted = false;
+            Code = code;
+            Quantity = quantity;
+
+        }
+
+        //internal void AssignSerialNumber(int serialNumber)
+        //{
+        //    SerialNumber = serialNumber; 
+        //}
 
         public void AdjustQuantity(int amount)
         {
@@ -37,11 +57,11 @@ namespace Purchasing.Domain.Models
             }
             Quantity += amount;
         }
-        public void Update(string code, decimal? price , int? quantity)
+        public void Update(string? name, decimal? price , int? quantity)
         {
-            Code = code;
-            Price = (decimal)price;
-            Quantity = (int)quantity;
+            Name = string.IsNullOrWhiteSpace(name) ? Name : name;
+            Price = price ?? Price;
+            Quantity = quantity ?? Quantity;
         }
 
         public void MarkAsDeleted()
