@@ -15,7 +15,6 @@ namespace Purchasing.Domain.Interfaces
     {
         Task<PurchaseOrderReadDTO> CreatePurchaseOrderAsync(List<PurchaseOrderItemBuyDTO> items);
         Task<PurchaseOrderReadDTO> GetPurchaseOrderByIdAsync(string PONumber);
-        //Task<IEnumerable<PurchaseOrder>> GetAllPurchaseOrdersAsync();
         Task<PurchaseOrderReadDTO> UpdatePurchaseOrderAsync(string PONumber, List<PurchaseOrderItemBuyDTO> items);
         Task<bool> DeletePurchaseOrderAsync(string PONumber);
         Task<bool> ApprovePurchaseOrderAsync(string PONumber);

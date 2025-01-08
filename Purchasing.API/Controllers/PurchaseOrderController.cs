@@ -66,25 +66,6 @@ namespace Purchasing.API.Controllers
             return Ok(purchaseOrderDto);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetAllPurchaseOrders()
-        //{
-        //    var purchaseOrders = await _service.GetAllPurchaseOrdersAsync();
-        //    return Ok(purchaseOrders);
-        //}
-
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetAllPurchaseOrders()
-        //{
-        //    var orders = await _service.GetAllPurchaseOrdersAsync();
-
-        //    return Ok(new
-        //    {
-        //        TotalCount = orders.Count,
-        //        Orders = orders
-        //    });
-        //}
 
         [HttpPost("Paged-Filteration-PON")]
         public async Task<IActionResult> GetPagedPurchaseOrders([FromBody] PurchaseOrderPagination pagination)
@@ -111,32 +92,6 @@ namespace Purchasing.API.Controllers
 
 
 
-
-        //[HttpPut]
-        //public async Task<IActionResult> UpdatePurchaseOrder( [FromBody] PurchaseOrderUpdateDTO purchaseOrderDto)
-        //{
-        //    if (purchaseOrderDto == null)
-        //    {
-        //        return BadRequest("PurchaseOrder data is required.");
-        //    }
-
-        //    try
-        //    {
-        //        var updatedPurchaseOrder = await _service.UpdatePurchaseOrderAsync(purchaseOrderDto.POnumber,
-        //             purchaseOrderDto.Items);
-
-        //        if (updatedPurchaseOrder == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        return Ok(updatedPurchaseOrder);
-        //    }
-        //    catch (InvalidOperationException ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
 
         [HttpPut]
         public async Task<IActionResult> UpdatePurchaseOrder([FromBody] PurchaseOrderUpdateDTO purchaseOrderDto)

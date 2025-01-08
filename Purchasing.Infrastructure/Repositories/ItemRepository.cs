@@ -73,10 +73,6 @@ namespace Purchasing.Infrastructure.Repositories
             return (items, totalCount);
         }
 
-        //public void Detach<T>(T entity) where T : class
-        //{
-        //    _context.Entry(entity).State = EntityState.Detached;
-        //}
 
         public void Detach(PurchaseOrderItem entity)
         {

@@ -23,8 +23,7 @@ namespace Purchasing.API
             builder.Services.AddScoped<IPurchaseOrderService, PurchaseOrderService>();
             builder.Services.AddScoped<IItemService, ItemService>();
 
-            //builder.Services.AddScoped<PurchaseOrderService>();
-            //builder.Services.TryAddScoped<ItemService>();
+
             builder.Services.AddLogging();
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
