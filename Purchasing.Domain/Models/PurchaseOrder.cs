@@ -1,4 +1,5 @@
 ﻿using Purchasing.Domain.Enums;
+using Purchasing.Domain.Helper;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +14,6 @@ namespace Purchasing.Domain.Models
 
     public class PurchaseOrder : BaseEntity
     {
-        private static readonly Random _random = new Random();
 
         public string POnumber { get; private set; }
         public decimal TotalPrice { get;  set; }
@@ -28,7 +28,7 @@ namespace Purchasing.Domain.Models
 
         public PurchaseOrder()
         {
-            POnumber = GenerateCode();
+            POnumber = CodeGenerator.GeneratePurchaseOrderCode();
         }
 
         public void Approve()
@@ -63,33 +63,7 @@ namespace Purchasing.Domain.Models
             ActivationState = PurchaseOrderActivationState.Deactivated;
         }
 
-        //public void AddItem(PurchaseOrderItem item, int quantity)
-        //{
-        //    if (quantity <= 0) throw new ArgumentException("Quantity must be greater than zero.");
 
-
-
-        //        // Assign a unique serial number
-        //        int nextSerialNumber = Items.Count > 0 ? Items.Max(i => i.SerialNumber.GetValueOrDefault()) + 1 : 1;
-        //        item.AssignSerialNumber(nextSerialNumber);
-
-        //        // Add the new item to the Items list
-        //        Items.Add(item);
-            
-
-        //    // Recalculate the total price of the purchase order
-        //    TotalPrice = RecalculateTotalAmount();
-
-        //}
-
-
-
-        //public decimal RecalculateTotalAmount()
-        //{
-        //    var p = Items.Sum(item => item.Price * item.Quantity);
-
-        //    return p;
-        //}
 
         public void UpdateDetails(string orderNumber, DateTime date, decimal totalPrice)
         {
@@ -108,11 +82,6 @@ namespace Purchasing.Domain.Models
             Items.Clear();
         }
 
-        private string GenerateCode()
-        {
-            int randomNumber = _random.Next(1000000, 10000000);
-            return $"PO{randomNumber}";
-        }
     }
 
 }

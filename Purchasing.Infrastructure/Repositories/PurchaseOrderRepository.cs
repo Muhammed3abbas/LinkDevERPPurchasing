@@ -22,7 +22,8 @@ namespace Purchasing.Infrastructure.Repositories
         public async Task<IEnumerable<PurchaseOrder>> GetAllAsync()
         {
             return await _context.PurchaseOrders
-                .Include(po => po.Items)
+            .Include(po => po.PurchaseOrderItemMappings)
+            .ThenInclude(mapping => mapping.PurchaseOrderItem)
                 .Where(po => !po.IsDeleted)
                 .AsNoTracking()
                 .ToListAsync();
@@ -31,10 +32,15 @@ namespace Purchasing.Infrastructure.Repositories
 
         public async Task<PurchaseOrder> GetByIdAsync(string PONumber)
         {
+
+
             return await _context.PurchaseOrders
-                .Include(po => po.Items)
-                .FirstOrDefaultAsync(po => po.POnumber == PONumber && !po.IsDeleted);
+            .Include(po => po.PurchaseOrderItemMappings)
+            .ThenInclude(mapping => mapping.PurchaseOrderItem) 
+            .FirstOrDefaultAsync(po => po.POnumber == PONumber && !po.IsDeleted);
         }
+
+
 
         public async Task AddAsync(PurchaseOrder purchaseOrder)
         {

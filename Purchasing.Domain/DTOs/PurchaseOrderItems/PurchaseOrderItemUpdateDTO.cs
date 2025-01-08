@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Purchasing.Domain.DTOs
+namespace Purchasing.Domain.DTOs.PurchaseOrderItems
 {
     public class PurchaseOrderItemUpdateDTO
     {

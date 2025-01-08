@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Purchasing.Domain.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,6 @@ namespace Purchasing.Domain.Models
 {
     public class PurchaseOrderItem : BaseEntity
     {
-        private static readonly Random _random = new Random();
 
         public string Code { get;  set; } 
         public string Name { get;  set; }
@@ -29,7 +29,7 @@ namespace Purchasing.Domain.Models
             Name = name;
             Price = price;
             IsDeleted = false;
-            Code = GenerateCode();
+            Code = CodeGenerator.GeneratePurchaseOrderItemCode();
             Quantity = quantity;
 
         }
@@ -44,10 +44,6 @@ namespace Purchasing.Domain.Models
 
         }
 
-        //internal void AssignSerialNumber(int serialNumber)
-        //{
-        //    SerialNumber = serialNumber; 
-        //}
 
         public void AdjustQuantity(int amount)
         {
@@ -57,24 +53,12 @@ namespace Purchasing.Domain.Models
             }
             Quantity += amount;
         }
-        public void Update(string? name, decimal? price , int? quantity)
-        {
-            Name = string.IsNullOrWhiteSpace(name) ? Name : name;
-            Price = price ?? Price;
-            Quantity = quantity ?? Quantity;
-        }
 
         public void MarkAsDeleted()
         {
             IsDeleted = true;
         }
 
-        private string GenerateCode()
-        {
-            // Generate a random 7-digit number
-            int randomNumber = _random.Next(1000000, 10000000); // Range: 1000000 to 9999999
-            return $"POI{randomNumber}";
-        }
     }
 
 

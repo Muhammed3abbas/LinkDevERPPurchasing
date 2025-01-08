@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Purchasing.Domain.DTOs.PurchaseOrderItems;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Purchasing.Domain.DTOs
+namespace Purchasing.Domain.DTOs.PurchaseOrder
 {
-    public class PurchaseOrderCreateDTO
+    public class PurchaseOrderDTO
     {
         public string OrderNumber { get; set; }
         public DateTime Date { get; set; }

@@ -1,5 +1,5 @@
-﻿using Purchasing.Domain.DTOs;
-using Purchasing.Domain.DTOs.PurchaseOrder;
+﻿using Purchasing.Domain.DTOs.PurchaseOrder;
+using Purchasing.Domain.DTOs.PurchaseOrderItems;
 using Purchasing.Domain.Enums;
 using Purchasing.Domain.Models;
 using System;

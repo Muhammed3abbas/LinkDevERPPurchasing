@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Purchasing.Domain.DTOs;
 using Purchasing.Domain.DTOs.PurchaseOrder;
 using Purchasing.Domain.DTOs.PurchaseOrderItems;
 using Purchasing.Domain.Models;
@@ -40,6 +39,11 @@ namespace Purchasing.API.Helpers
                 .ForMember(dest => dest.ActivationState, opt => opt.MapFrom(src => src.ActivationState.ToString())) // Map enum to string
                 .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.PurchaseOrderItemMappings));
 
+
+            //CreateMap<PurchaseOrder, PurchaseOrderReadDTO>()
+            //    .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State.ToString())) // Enum to string mapping
+            //    .ForMember(dest => dest.ActivationState, opt => opt.MapFrom(src => src.ActivationState.ToString())) // Enum to string mapping
+            //    .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items)); // Map Items
 
 
         }

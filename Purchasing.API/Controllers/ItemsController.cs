@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Purchasing.Application.Services;
-using Purchasing.Domain.DTOs;
+using Purchasing.Domain.DTOs.PurchaseOrderItems;
 using Purchasing.Domain.Models;
 
 namespace Purchasing.API.Controllers

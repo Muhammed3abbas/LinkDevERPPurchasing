@@ -1,15 +1,17 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Purchasing.Application.DTOs;
-using Purchasing.Domain.DTOs;
+using Purchasing.Domain.DTOs.PurchaseOrderItems;
 using Purchasing.Domain.Interfaces;
 using Purchasing.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Purchasing.Application.Services
 {
@@ -72,9 +74,17 @@ namespace Purchasing.Application.Services
             var item = await _itemRepository.GetByIdAsync(itemUpdateDTO.Code);
             if (item != null)
             {
-                item.Update(itemUpdateDTO.Name, itemUpdateDTO.Price, itemUpdateDTO.Quantity);
+
+                item.Name = string.IsNullOrWhiteSpace(itemUpdateDTO.Name) ? item.Name : itemUpdateDTO.Name;
+                item.Price = itemUpdateDTO.Price ?? item.Price  ;
+                item.Quantity = itemUpdateDTO.Quantity ?? item.Quantity;
+
+
                 await _itemRepository.UpdateAsync(item);
                 return item;
+
+
+
 
             }
             else
@@ -83,7 +93,6 @@ namespace Purchasing.Application.Services
                 return null;
             }
         }
-
 
         public async Task DeleteItemAsync(string code)
         {

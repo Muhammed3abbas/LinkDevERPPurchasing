@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "itemDto",
-        "Type": "Purchasing.Domain.DTOs.PurchaseOrderItemCreateDTO",
+        "Type": "Purchasing.Domain.DTOs.PurchaseOrderItems.PurchaseOrderItemCreateDTO",
         "IsRequired": true
       }
     ],
@@ -35,7 +35,7 @@
     "Parameters": [
       {
         "Name": "itemDto",
-        "Type": "Purchasing.Domain.DTOs.PurchaseOrderItemUpdateDTO",
+        "Type": "Purchasing.Domain.DTOs.PurchaseOrderItems.PurchaseOrderItemUpdateDTO",
         "IsRequired": true
       }
     ],
@@ -83,7 +83,7 @@
     "Parameters": [
       {
         "Name": "Paging",
-        "Type": "Purchasing.Domain.DTOs.PurchaseOrderItemPagination",
+        "Type": "Purchasing.Domain.DTOs.PurchaseOrderItems.PurchaseOrderItemPagination",
         "IsRequired": true
       }
     ],
@@ -99,7 +99,7 @@
     "Parameters": [
       {
         "Name": "items",
-        "Type": "System.Collections.Generic.List\u00601[[Purchasing.Domain.DTOs.PurchaseOrderItemBuyDTO, Purchasing.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[Purchasing.Domain.DTOs.PurchaseOrderItems.PurchaseOrderItemBuyDTO, Purchasing.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],
@@ -146,7 +146,7 @@
       },
       {
         "Name": "purchaseOrderDto",
-        "Type": "Purchasing.Domain.DTOs.PurchaseOrderDTO",
+        "Type": "Purchasing.Domain.DTOs.PurchaseOrder.PurchaseOrderDTO",
         "IsRequired": true
       }
     ],

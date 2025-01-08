@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Purchasing.Application.DTOs;
-using Purchasing.Domain.DTOs;
 using Purchasing.Domain.DTOs.PurchaseOrder;
+using Purchasing.Domain.DTOs.PurchaseOrderItems;
 using Purchasing.Domain.Enums;
 using Purchasing.Domain.Interfaces;
 using Purchasing.Domain.Models;
