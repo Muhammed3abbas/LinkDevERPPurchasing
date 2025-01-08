@@ -58,29 +58,20 @@ namespace Purchasing.Domain.Models
             State = PurchaseOrderState.Closed;
         }
 
-        public void Deactivate()
-        {
-            ActivationState = PurchaseOrderActivationState.Deactivated;
-        }
 
+        public void Deactivate() => ActivationState = PurchaseOrderActivationState.Deactivated;
 
+        public void MarkAsDeleted() => IsDeleted = true;
 
-        public void UpdateDetails(string orderNumber, DateTime date, decimal totalPrice)
+        public void ClearItems() => Items.Clear();
+
+        public void UpdateDetails(string orderNumber,  decimal totalPrice)
         {
             POnumber = orderNumber;
-            IssuedDate = date;
             TotalPrice = totalPrice;
         }
 
-        public void MarkAsDeleted()
-        {
-            IsDeleted = true;
-        }
 
-        public void ClearItems()
-        {
-            Items.Clear();
-        }
 
     }
 

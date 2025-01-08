@@ -16,14 +16,13 @@ namespace Purchasing.API.Helpers
             CreateMap<PurchaseOrderItem, PurchaseOrderItemPagination>().ReverseMap();
 
             CreateMap<PurchaseOrderDTO, PurchaseOrder>()
-            .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items));
+            .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items)).ReverseMap();
 
-            CreateMap<PurchaseOrderItem, PurchaseOrderItemReadDto>();
-            //CreateMap<PurchaseOrder, PurchaseOrderReadDTO>()
-            //    .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State.ToString())) // Map enum to string
-            //    .ForMember(dest => dest.ActivationState, opt => opt.MapFrom(src => src.ActivationState.ToString())) // Map enum to string
-            //    .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items));
+            CreateMap<PurchaseOrder, PurchaseOrderReadDTO>().ReverseMap();
 
+
+
+            CreateMap<PurchaseOrderItem, PurchaseOrderItemReadDto>().ReverseMap();
 
 
             // Mapping for PurchaseOrderItem to PurchaseOrderItemReadDto
@@ -40,11 +39,11 @@ namespace Purchasing.API.Helpers
                 .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.PurchaseOrderItemMappings));
 
 
-            //CreateMap<PurchaseOrder, PurchaseOrderReadDTO>()
-            //    .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State.ToString())) // Enum to string mapping
-            //    .ForMember(dest => dest.ActivationState, opt => opt.MapFrom(src => src.ActivationState.ToString())) // Enum to string mapping
-            //    .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items)); // Map Items
-
+            CreateMap<PurchaseOrderItemMapping, PurchaseOrderItemDTO>()
+                .ForMember(dest => dest.Code, opt => opt.MapFrom(src => src.PurchaseOrderItem.Code))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.PurchaseOrderItem.Name))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.PurchaseOrderItem.Price))
+                .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
 
         }
     }

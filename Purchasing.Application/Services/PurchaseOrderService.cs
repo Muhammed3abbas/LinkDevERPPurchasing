@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
 using Purchasing.Application.DTOs;
+using Purchasing.Domain.DTOs;
 using Purchasing.Domain.DTOs.PurchaseOrder;
 using Purchasing.Domain.DTOs.PurchaseOrderItems;
 using Purchasing.Domain.Enums;
@@ -124,13 +126,16 @@ namespace Purchasing.Application.Services
         private readonly IPurchaseOrderRepository _repository;
         private readonly IItemRepository _itemRepository;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _cache;
+
         private static readonly Random _random = new Random();
 
-        public PurchaseOrderService(IPurchaseOrderRepository repository, IItemRepository itemRepository, IMapper mapper)
+        public PurchaseOrderService(IPurchaseOrderRepository repository, IItemRepository itemRepository, IMapper mapper, IMemoryCache cache)
         {
             _repository = repository;
             _itemRepository = itemRepository;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<PurchaseOrderReadDTO> CreatePurchaseOrderAsync(List<PurchaseOrderItemBuyDTO> items)
@@ -215,17 +220,140 @@ namespace Purchasing.Application.Services
             return _mapper.Map<List<PurchaseOrderReadDTO>>(purchaseOrders);
 
         }
-
-        public async Task<PurchaseOrder> UpdatePurchaseOrderAsync(string PONumber, string orderNumber, DateTime date, decimal totalPrice, List<PurchaseOrderItemBuyDTO> items)
+        public async Task<(List<PurchaseOrderReadDTO>, int)> GetCachedPurchaseOrdersAsync()
         {
-            var purchaseOrder = await _repository.GetByIdAsync(PONumber);
+            const string cacheKey = "PurchaseOrdersCache3";
+            List<PurchaseOrderReadDTO> cachedOrders;
+            int totalCount;
+
+            if (!_cache.TryGetValue(cacheKey, out cachedOrders))
+            {
+                var purchaseOrders = await _repository.GetAllAsync();
+
+                // Map and take the top 7 for caching
+                cachedOrders = _mapper.Map<List<PurchaseOrderReadDTO>>(purchaseOrders.Take(7).ToList());
+
+                // Cache the top 7 purchase orders
+                _cache.Set(cacheKey, cachedOrders, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10) // Adjust CacheDuration as needed
+                });
+
+                // Get the total count from the database
+                totalCount = purchaseOrders.Count();
+            }
+            else
+            {
+                // If cached, still need to fetch the total count separately
+                totalCount = await _repository.GetTotalCountAsync();
+            }
+
+            return (cachedOrders, totalCount);
+        }
+        public async Task<PaginatedResultDTO<PurchaseOrderReadDTO>> GetPagedPurchaseOrdersAsync(int pageNumber, int pageSize, string? POnumberFilter)
+        {
+            var (items, totalCount) = await _repository.GetPagedItemsAsync(pageNumber, pageSize, POnumberFilter);
+
+            return new PaginatedResultDTO<PurchaseOrderReadDTO>
+            {
+                TotalCount = totalCount,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                Items = items.Select(item => _mapper.Map<PurchaseOrderReadDTO>(item)).ToList()
+            };
+        }
+        public async Task<PaginatedResultDTO<PurchaseOrderReadDTO>> GetPurchaseOrdersCachedPaginationAsync(int pageNumber, int pageSize)
+        {
+            const string CacheKey = "Top7PurchaseOrders";
+            List<PurchaseOrderReadDTO> cachedOrders;
+
+            if (pageNumber == 1 && _cache.TryGetValue(CacheKey, out cachedOrders))
+            {
+                return new PaginatedResultDTO<PurchaseOrderReadDTO>
+                {
+                    Items = cachedOrders,
+                    TotalCount = await _repository.GetTotalCountAsync(),
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize
+                };
+            }
+
+            var purchaseOrders = await _repository.GetPagedAsync(pageNumber, pageSize);
+            var purchaseOrderDtos = _mapper.Map<List<PurchaseOrderReadDTO>>(purchaseOrders);
+
+            if (pageNumber == 1)
+            {
+                cachedOrders = purchaseOrderDtos.Take(7).ToList();
+                _cache.Set(CacheKey, cachedOrders, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+                });
+            }
+
+            return new PaginatedResultDTO<PurchaseOrderReadDTO>
+            {
+                Items = purchaseOrderDtos,
+                TotalCount = await _repository.GetTotalCountAsync(),
+                CurrentPage = pageNumber,
+                PageSize = pageSize
+            };
+        }
+
+        //public async Task<PurchaseOrder> UpdatePurchaseOrderAsync(string PONumber, List<PurchaseOrderItemBuyDTO> items)
+        //{
+        //    var purchaseOrder = await _repository.GetByIdAsync(PONumber);
+        //    if (purchaseOrder == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    //purchaseOrder.UpdateDetails(orderNumber, totalPrice);
+        //    //purchaseOrder.ClearItems();
+
+        //    foreach (var itemDto in items)
+        //    {
+        //        var item = await _itemRepository.GetByIdAsync(itemDto.Code);
+        //        if (item == null)
+        //        {
+        //            throw new InvalidOperationException($"Item with code {itemDto.Code} does not exist.");
+        //        }
+
+        //        item.AdjustQuantity(-itemDto.Quantity);
+        //        //purchaseOrder.AddItem(item, itemDto.Quantity);
+        //    }
+
+        //    await _repository.UpdateAsync(purchaseOrder);
+        //    return purchaseOrder;
+        //}
+
+        public async Task<PurchaseOrder> UpdatePurchaseOrderAsync1(string poNumber, List<PurchaseOrderItemBuyDTO> items)
+        {
+            var purchaseOrder = await _repository.GetByIdAsync(poNumber);
             if (purchaseOrder == null)
             {
                 return null;
             }
 
-            purchaseOrder.UpdateDetails(orderNumber, date, totalPrice);
-            purchaseOrder.ClearItems();
+            //purchaseOrder.UpdateItems(items, _itemRepository);
+            await _repository.UpdateAsync(purchaseOrder);
+            return purchaseOrder;
+        }
+
+
+        public async Task<PurchaseOrderReadDTO> UpdatePurchaseOrderAsync(string poNumber, List<PurchaseOrderItemBuyDTO> items)
+        {
+            // Fetch the existing purchase order
+            var purchaseOrder = await _repository.GetByIdAsync(poNumber);
+            if (purchaseOrder == null)
+            {
+                return null;
+            }
+
+            // Reset the total price
+            decimal newTotalPrice = 0;
+
+            // Keep track of the codes of items that need to be removed
+            var existingItemCodes = purchaseOrder.PurchaseOrderItemMappings.Select(m => m.PurchaseOrderItem.Code).ToList();
 
             foreach (var itemDto in items)
             {
@@ -235,13 +363,70 @@ namespace Purchasing.Application.Services
                     throw new InvalidOperationException($"Item with code {itemDto.Code} does not exist.");
                 }
 
-                item.AdjustQuantity(-itemDto.Quantity);
-                //purchaseOrder.AddItem(item, itemDto.Quantity);
+                if (item.Quantity < itemDto.Quantity)
+                {
+                    throw new InvalidOperationException($"Insufficient quantity for item {itemDto.Code}.");
+                }
+
+                // Adjust stock quantity for the item
+                item.Quantity -= itemDto.Quantity;
+
+                // Check if the item already exists in the PurchaseOrder via mappings
+                var existingMapping = purchaseOrder.PurchaseOrderItemMappings
+                    .FirstOrDefault(mapping => mapping.PurchaseOrderItemCode == itemDto.Code);
+
+                if (existingMapping != null)
+                {
+                    // adding quantity that will be deducted lately
+                    item.Quantity += existingMapping.Quantity;
+                    // Update the existing mapping with the new quantity
+                    existingMapping.Quantity = itemDto.Quantity;
+                    // Remove the code from the list of items to be deleted
+                    existingItemCodes.Remove(itemDto.Code);
+                }
+                else
+                {
+                    // Create a new mapping for the purchase order and item
+                    var newMapping = new PurchaseOrderItemMapping
+                    {
+                        PurchaseOrder = purchaseOrder,
+                        PurchaseOrderItem = item,
+                        Quantity = itemDto.Quantity
+                    };
+
+                    purchaseOrder.PurchaseOrderItemMappings.Add(newMapping);
+                }
+
+                // Update the total price
+                newTotalPrice += item.Price * itemDto.Quantity;
+
+                // Save the updated item to the repository
+                await _itemRepository.UpdateAsync(item);
             }
 
+            // Remove any mappings for items that were not included in the updated list
+            foreach (var itemCode in existingItemCodes)
+            {
+                var mappingToRemove = purchaseOrder.PurchaseOrderItemMappings
+                    .FirstOrDefault(mapping => mapping.PurchaseOrderItemCode == itemCode);
+
+                if (mappingToRemove != null)
+                {
+                    purchaseOrder.PurchaseOrderItemMappings.Remove(mappingToRemove);
+                }
+            }
+
+            // Update the total price of the purchase order
+            purchaseOrder.TotalPrice = newTotalPrice;
+
+            // Save the updated purchase order
             await _repository.UpdateAsync(purchaseOrder);
-            return purchaseOrder;
+
+            return _mapper.Map<PurchaseOrderReadDTO>(purchaseOrder);
+
         }
+
+
 
         public async Task<bool> DeletePurchaseOrderAsync(string PONumber)
         {
@@ -303,13 +488,6 @@ namespace Purchasing.Application.Services
             return true;
         }
 
-
-
-        private int GenerateCode()
-        {
-            int randomNumber = _random.Next(1000000, 10000000);
-            return randomNumber;
-        }
     }
 
 

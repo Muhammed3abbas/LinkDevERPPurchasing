@@ -51,7 +51,8 @@ namespace Purchasing.Infrastructure.Repositories
         }
 
 
-        public async Task<IEnumerable<PurchaseOrderItem>> GetPagedItemsAsync(int pageNumber, int pageSize, string? nameFilter)
+
+        public async Task<(List<PurchaseOrderItem>, int)> GetPagedItemsAsync(int pageNumber, int pageSize, string? nameFilter)
         {
             var query = _context.PurchaseOrderItems.AsNoTracking().Where(i => !i.IsDeleted);
 
@@ -60,12 +61,17 @@ namespace Purchasing.Infrastructure.Repositories
                 query = query.Where(i => i.Name.Contains(nameFilter));
             }
 
-            return await query
+            // Get total count before pagination
+            var totalCount = await query.CountAsync();
+
+            // Apply pagination
+            var items = await query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-        }
 
+            return (items, totalCount);
+        }
 
         //public void Detach<T>(T entity) where T : class
         //{

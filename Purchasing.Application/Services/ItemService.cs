@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Purchasing.Application.DTOs;
+using Purchasing.Domain.DTOs;
 using Purchasing.Domain.DTOs.PurchaseOrderItems;
 using Purchasing.Domain.Interfaces;
 using Purchasing.Domain.Models;
@@ -15,7 +16,9 @@ using System.Xml.Linq;
 
 namespace Purchasing.Application.Services
 {
-    public class ItemService
+
+
+    public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
         private readonly ILogger<ItemService> _logger;
@@ -28,9 +31,9 @@ namespace Purchasing.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<PurchaseOrderItemDTO> CreateItemAsync(string name, decimal price,int quantity)
+        public async Task<PurchaseOrderItemDTO> CreateItemAsync(string name, decimal price, int quantity)
         {
-            var item = new PurchaseOrderItem(name, price,quantity);
+            var item = new PurchaseOrderItem(name, price, quantity);
             await _itemRepository.AddAsync(item);
             return _mapper.Map<PurchaseOrderItemDTO>(item);
         }
@@ -38,7 +41,7 @@ namespace Purchasing.Application.Services
 
         public async Task<PurchaseOrderItem> GetItemByIdAsync(string id)
         {
-            var item =  await _itemRepository.GetByIdAsync(id);
+            var item = await _itemRepository.GetByIdAsync(id);
             if (item != null)
             {
                 return item;
@@ -56,19 +59,21 @@ namespace Purchasing.Application.Services
         {
             return await _itemRepository.GetAllAsync();
         }
-        public async Task<IEnumerable<PurchaseOrderItemDTO>> GetPagedItemsAsync(int pageNumber, int pageSize, string? nameFilter)
+
+
+
+        public async Task<PaginatedResultDTO<PurchaseOrderItemDTO>> GetPagedItemsAsync(int pageNumber, int pageSize, string? nameFilter)
         {
-            var items = await _itemRepository.GetPagedItemsAsync(pageNumber, pageSize, nameFilter);
-            return items.Select(item => new PurchaseOrderItemDTO
+            var (items, totalCount) = await _itemRepository.GetPagedItemsAsync(pageNumber, pageSize, nameFilter);
+
+            return new PaginatedResultDTO<PurchaseOrderItemDTO>
             {
-                Code = item.Code,
-                Name = item.Name,
-                Price = item.Price,
-                Quantity = item.Quantity
-            });
+                TotalCount = totalCount,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                Items = items.Select(item => _mapper.Map<PurchaseOrderItemDTO>(item)).ToList()
+            };
         }
-
-
         public async Task<PurchaseOrderItem> UpdateItemAsync(PurchaseOrderItemUpdateDTO itemUpdateDTO)
         {
             var item = await _itemRepository.GetByIdAsync(itemUpdateDTO.Code);
@@ -76,7 +81,7 @@ namespace Purchasing.Application.Services
             {
 
                 item.Name = string.IsNullOrWhiteSpace(itemUpdateDTO.Name) ? item.Name : itemUpdateDTO.Name;
-                item.Price = itemUpdateDTO.Price ?? item.Price  ;
+                item.Price = itemUpdateDTO.Price ?? item.Price;
                 item.Quantity = itemUpdateDTO.Quantity ?? item.Quantity;
 
 

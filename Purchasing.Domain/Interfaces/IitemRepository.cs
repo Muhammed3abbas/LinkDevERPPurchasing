@@ -11,7 +11,9 @@ namespace Purchasing.Domain.Interfaces
     {
         Task<PurchaseOrderItem> GetByIdAsync(string id);
         Task<IEnumerable<PurchaseOrderItem>> GetAllAsync();
-        Task<IEnumerable<PurchaseOrderItem>> GetPagedItemsAsync(int pageNumber, int pageSize, string? nameFilter);
+        //Task<IEnumerable<PurchaseOrderItem>> GetPagedItemsAsync(int pageNumber, int pageSize, string? nameFilter);
+        Task<(List<PurchaseOrderItem>, int)> GetPagedItemsAsync(int pageNumber, int pageSize, string? nameFilter);
+
         Task AddAsync(PurchaseOrderItem item);
         Task UpdateAsync(PurchaseOrderItem item);
         Task SoftDeleteAsync(PurchaseOrderItem item);

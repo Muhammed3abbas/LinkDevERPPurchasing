@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Purchasing.Domain.DTOs.PurchaseOrder;
 using Purchasing.Domain.DTOs.PurchaseOrderItems;
+using Microsoft.Extensions.Caching.Memory;
+using Purchasing.Domain.Models;
 
 
 namespace Purchasing.API.Controllers
@@ -20,11 +22,18 @@ namespace Purchasing.API.Controllers
     public class PurchaseOrderController : ControllerBase
     {
         private readonly IPurchaseOrderService _service;
+        private readonly IMemoryCache _cache;
+        private const string CacheKey = "Top7PurchaseOrders";
+        private readonly TimeSpan CacheDuration = TimeSpan.FromMinutes(10);
 
-        public PurchaseOrderController(IPurchaseOrderService service)
+        public PurchaseOrderController(IPurchaseOrderService service , IMemoryCache cache)
         {
             _service = service;
+            _cache = cache;
+
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> CreatePurchaseOrder([FromBody] List<PurchaseOrderItemBuyDTO> items)
@@ -57,25 +66,89 @@ namespace Purchasing.API.Controllers
             return Ok(purchaseOrderDto);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllPurchaseOrders()
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllPurchaseOrders()
+        //{
+        //    var purchaseOrders = await _service.GetAllPurchaseOrdersAsync();
+        //    return Ok(purchaseOrders);
+        //}
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllPurchaseOrders()
+        //{
+        //    var orders = await _service.GetAllPurchaseOrdersAsync();
+
+        //    return Ok(new
+        //    {
+        //        TotalCount = orders.Count,
+        //        Orders = orders
+        //    });
+        //}
+
+        [HttpPost("Paged-Filteration-PON")]
+        public async Task<IActionResult> GetPagedPurchaseOrders([FromBody] PurchaseOrderPagination pagination)
         {
-            var purchaseOrders = await _service.GetAllPurchaseOrdersAsync();
-            return Ok(purchaseOrders);
+            var result = await _service.GetPagedPurchaseOrdersAsync(
+                pagination.PageNumber,
+                pagination.PageSize,
+                pagination.NameFilter);
+
+            return Ok(result);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePurchaseOrder(string id, [FromBody] PurchaseOrderDTO purchaseOrderDto)
+
+
+        [HttpGet("cached-paginated")]
+        public async Task<IActionResult> GetAllPurchaseOrdersCachedPagination(int pageNumber = 1, int pageSize = 7)
+        {
+            // Call the service to get the paginated purchase orders
+            var paginatedResult = await _service.GetPurchaseOrdersCachedPaginationAsync(pageNumber, pageSize);
+
+            // Return the result as an HTTP response
+            return Ok(paginatedResult);
+        }
+
+
+
+
+        //[HttpPut]
+        //public async Task<IActionResult> UpdatePurchaseOrder( [FromBody] PurchaseOrderUpdateDTO purchaseOrderDto)
+        //{
+        //    if (purchaseOrderDto == null)
+        //    {
+        //        return BadRequest("PurchaseOrder data is required.");
+        //    }
+
+        //    try
+        //    {
+        //        var updatedPurchaseOrder = await _service.UpdatePurchaseOrderAsync(purchaseOrderDto.POnumber,
+        //             purchaseOrderDto.Items);
+
+        //        if (updatedPurchaseOrder == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        return Ok(updatedPurchaseOrder);
+        //    }
+        //    catch (InvalidOperationException ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        [HttpPut]
+        public async Task<IActionResult> UpdatePurchaseOrder([FromBody] PurchaseOrderUpdateDTO purchaseOrderDto)
         {
             if (purchaseOrderDto == null)
             {
-                return BadRequest("PurchaseOrder data is required.");
+                return BadRequest("Purchase order data is required.");
             }
 
             try
             {
-                var updatedPurchaseOrder = await _service.UpdatePurchaseOrderAsync(id, purchaseOrderDto.OrderNumber, purchaseOrderDto.Date,
-                    purchaseOrderDto.TotalPrice, purchaseOrderDto.Items);
+                var updatedPurchaseOrder = await _service.UpdatePurchaseOrderAsync(purchaseOrderDto.POnumber, purchaseOrderDto.Items);
 
                 if (updatedPurchaseOrder == null)
                 {
@@ -89,6 +162,7 @@ namespace Purchasing.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePurchaseOrder(string id)

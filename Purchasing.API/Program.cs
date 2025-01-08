@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Purchasing.API.Helpers;
 using Purchasing.Application.Services;
 using Purchasing.Domain.Interfaces;
@@ -20,11 +21,14 @@ namespace Purchasing.API
             builder.Services.AddScoped<IPurchaseOrderRepository, PurchaseOrderRepository>();
             builder.Services.AddScoped<IItemRepository, ItemRepository>();
             builder.Services.AddScoped<IPurchaseOrderService, PurchaseOrderService>();
-            builder.Services.AddScoped<PurchaseOrderService>();
-            builder.Services.AddScoped<ItemService>();
+            builder.Services.AddScoped<IItemService, ItemService>();
+
+            //builder.Services.AddScoped<PurchaseOrderService>();
+            //builder.Services.TryAddScoped<ItemService>();
             builder.Services.AddLogging();
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+            builder.Services.AddMemoryCache();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

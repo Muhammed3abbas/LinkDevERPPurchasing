@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Purchasing.Application.Services;
 using Purchasing.Domain.DTOs.PurchaseOrderItems;
+using Purchasing.Domain.Interfaces;
 using Purchasing.Domain.Models;
 
 namespace Purchasing.API.Controllers
@@ -11,9 +12,8 @@ namespace Purchasing.API.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly ItemService _itemService;
-
-        public ItemsController(ItemService itemService)
+        private readonly IItemService _itemService;
+        public ItemsController(IItemService itemService )
         {
             _itemService = itemService;
         }
@@ -37,15 +37,19 @@ namespace Purchasing.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var items = await _itemService.GetAllItemsAsync();
-            return Ok(items);
+            var count = items.Count();
+            return Ok(new { items, count });
         }
 
         [HttpPost("paged")]
-        public async Task<IActionResult> GetPagedItems([FromBody] PurchaseOrderItemPagination Paging)
+        public async Task<IActionResult> GetPagedItems([FromBody] PurchaseOrderItemPagination? Paging)
         {
-            var items = await _itemService.GetPagedItemsAsync(Paging.pageNumber, Paging.pageSize, Paging.nameFilter);
-            return Ok(items);
+            Paging ??= new PurchaseOrderItemPagination{pageNumber = 1,pageSize = 10,nameFilter = null};
+            var result = await _itemService.GetPagedItemsAsync((int)Paging.pageNumber, (int)Paging.pageSize, Paging.nameFilter);
+            return Ok(result);
         }
+
+
 
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] PurchaseOrderItemUpdateDTO itemDto)

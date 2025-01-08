@@ -25,10 +25,67 @@ namespace Purchasing.Infrastructure.Repositories
             .Include(po => po.PurchaseOrderItemMappings)
             .ThenInclude(mapping => mapping.PurchaseOrderItem)
                 .Where(po => !po.IsDeleted)
+                .OrderByDescending(po=>po.IssuedDate)
                 .AsNoTracking()
                 .ToListAsync();
         }
 
+        public async Task<int> GetTotalCountAsync()
+        {
+            return await _context.PurchaseOrders.CountAsync(po => !po.IsDeleted);
+        }
+
+        public async Task<(IEnumerable<PurchaseOrder> Items, int TotalCount)> GetPagedItemsAsync(
+            int pageNumber,
+            int pageSize,
+            string? POnumberFilter)
+        {
+            // Base query
+            var query = _context.PurchaseOrders
+                .Include(po => po.PurchaseOrderItemMappings)
+                .ThenInclude(mapping => mapping.PurchaseOrderItem)
+                .OrderByDescending(po => po.IssuedDate)
+                .Where(po => !po.IsDeleted)
+                .AsNoTracking();
+
+            // Apply filter if provided
+            if (!string.IsNullOrWhiteSpace(POnumberFilter))
+            {
+                query = query.Where(po => po.POnumber.Contains(POnumberFilter));
+            }
+
+            // Get the total count before applying pagination
+            var totalCount = await query.CountAsync();
+
+            // Apply pagination
+            var pagedItems = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Return both paged items and total count
+            return (pagedItems, totalCount);
+        }
+
+
+
+        public async Task<List<PurchaseOrder>> GetPagedAsync(int pageNumber, int pageSize)
+        {
+            return await _context.PurchaseOrders
+                .Include(po => po.PurchaseOrderItemMappings)
+                .ThenInclude(mapping => mapping.PurchaseOrderItem)
+                .Where(po => !po.IsDeleted)
+                .OrderByDescending(po => po.IssuedDate)
+                .AsNoTracking()
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.PurchaseOrders.CountAsync(po => !po.IsDeleted);
+        }
 
         public async Task<PurchaseOrder> GetByIdAsync(string PONumber)
         {
